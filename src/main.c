@@ -64,7 +64,7 @@ int main(void) {
     brightness += step;
     // if (brightness == 0b00 || brightness == 0b11) step = -step;
     if (brightness == 0b000 || brightness == 0b111) step = -step;
-    _delay_ms(500);
+    _delay_ms(100);
   }
   
 }
