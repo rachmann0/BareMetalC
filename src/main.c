@@ -3,7 +3,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define F_CPU 16000000
+// #define F_CPU 16000000
 
 const uint32_t LED_DURATION = 500;
 
