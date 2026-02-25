@@ -5,7 +5,6 @@
 uint32_t lastTime = 0;
 const uint32_t LED_DURATION = 500;
 int main(void) {
-  sei(); //! enables global interrupts
   sysTime_init();
 
   //! DDR (Data Direction Register) determines the DIRECTION of the data (Input or Output)
