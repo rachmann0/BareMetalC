@@ -3,7 +3,7 @@
 #include "sysTime.h"
 
 uint32_t lastTime = 0;
-const uint32_t LED_DURATION = 1000;
+const uint32_t LED_DURATION = 500;
 int main(void) {
   sei(); //! enables global interrupts
   sysTime_init();
@@ -11,8 +11,8 @@ int main(void) {
   //! DDR (Data Direction Register) determines the DIRECTION of the data (Input or Output)
   const int8_t BUILTIN_LED = PB5; // built-in LED
   const int8_t PIN8_OUT = PB0; // pin 8
-  DDRB |= (1<<BUILTIN_LED); 
-  DDRB |= (1<<PIN8_OUT); 
+  DDRB |= _BV(BUILTIN_LED); 
+  DDRB |= _BV(PIN8_OUT); // _BV equivalent to  1<<x
 
   while (1)
   {
