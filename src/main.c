@@ -14,12 +14,14 @@ uint32_t last_time_note = 0;
 const uint32_t LED_DURATION = 500;
 
 const Note melody[] PROGMEM = { //! PROGMEM stores it in flash (not SRAM)
-    {GET_COMPARE_VAL(440), 800},  // A4, 800ms
-    {GET_COMPARE_VAL(392), 700},  // G4
-    {0,     500},  // pause 100 ms
+    {GET_COMPARE_VAL(262), 400},  // C4
+    {GET_COMPARE_VAL(294), 400},  // D4
     {GET_COMPARE_VAL(330), 400},  // E4
-    {GET_COMPARE_VAL(262), 200},   // C4
-    {GET_COMPARE_VAL(440), 1000}  // A4
+    {GET_COMPARE_VAL(349), 400},  // F4
+    {GET_COMPARE_VAL(392), 400},  // G4
+    {GET_COMPARE_VAL(440), 400},  // A4
+    {GET_COMPARE_VAL(494), 400},  // B4
+    {GET_COMPARE_VAL(523), 600}   // C5
 };
 const uint8_t melody_length = sizeof(melody)/sizeof(melody[0]);
 
