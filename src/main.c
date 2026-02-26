@@ -15,7 +15,8 @@ const uint32_t LED_DURATION = 500;
 
 const Note melody[] PROGMEM = { //! PROGMEM stores it in flash (not SRAM)
     {GET_COMPARE_VAL(440), 800},  // A4, 800ms
-    {GET_COMPARE_VAL(392), 500},  // G4
+    {GET_COMPARE_VAL(392), 700},  // G4
+    {0,     500},  // pause 100 ms
     {GET_COMPARE_VAL(330), 400},  // E4
     {GET_COMPARE_VAL(262), 200},   // C4
     {GET_COMPARE_VAL(440), 1000}  // A4
@@ -51,11 +52,16 @@ int main(void) {
         // shift last time to current time by adding current_note_duration
         last_time_note += current_note_duration; 
 
-        // increment melody
+        // increment to next Note
         melody_index++;
         current_pitch = pgm_read_word(&melody[melody_index].ocr);
         current_note_duration = pgm_read_word(&melody[melody_index].duration_ms);
+
+        //* shorten the note to create a tiny gap (optional)
+        if (current_note_duration > 50) current_note_duration -= 50;
+
         // turn on next melody
+        //? current_pitch = 0 for pauses
         tone_on(current_pitch);
       }      
     }

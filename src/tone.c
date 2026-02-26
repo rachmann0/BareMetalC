@@ -31,12 +31,19 @@ void tone_init(void) {
 void tone_off(){
     //! COM1A1 and COM1A0 form 2 bit fields (they work together, so to turn them off turn both off)
     TCCR1A &= ~((1 << COM1A1) | (1 << COM1A0)); // disconnect timer from pin
+    TCCR1B &= ~( (1<<CS12) | (1<<CS11) | (1<<CS10) ); // stop timer
     PORTB &= ~(1 << BUZZER_PIN); // force pin low
 }
 
 void tone_on(uint16_t ocr) {
-    OCR1A = ocr;
-    TCCR1A |= (1 << COM1A0);
+    if (ocr == 0) {
+        // pause: do not start timer
+        tone_off();
+    } else {
+        OCR1A = ocr;
+        TCCR1A |= (1 << COM1A0); // toggle on compare match
+        TCCR1B |= (1 << CS10); // start timer with prescaler=1
+    }
 }
 
 bool tone_is_on(void){
