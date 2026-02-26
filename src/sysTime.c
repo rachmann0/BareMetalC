@@ -18,13 +18,6 @@ void sysTime_init(void) {
     TCCR0A &= ~(1<<WGM00);
     TCCR0B &= ~(1<<WGM02);
 
-    //! Prescalers (ticks by default 16Mhz)
-    //* 16 000 000 / 64 = 250 000 / 1000ms => 250ticks/1ms
-    //? prescaler set to 64
-    TCCR0B |= (1<<CS01);
-    TCCR0B |= (1<<CS00);
-    TCCR0B &= ~(1<<CS02);
-
     //! Calling Interupts
     //? OCR (Output Compare Register) (compare to timer counter value)
     OCR0A = 249; // counts from 0 and we want 250 ticks
@@ -32,6 +25,14 @@ void sysTime_init(void) {
     //? TIMSK (Timer/Counter Interrupt Mask Register)
     //? OCIE (Output Compare Interrupt Enable) (this will enable the interrupt when OCR0A is true)
     TIMSK0 |= (1<<OCIE0A);
+
+    //! Prescalers (ticks by default 16Mhz)
+    //? set prescaler bits last as it is what PHYSICALLY starts the timer
+    //* 16 000 000 / 64 = 250 000 / 1000ms => 250ticks/1ms
+    //? prescaler set to 64
+    TCCR0B |= (1<<CS01);
+    TCCR0B |= (1<<CS00);
+    TCCR0B &= ~(1<<CS02);
 
     sei(); //! enables global interrupts
 

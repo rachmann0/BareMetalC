@@ -34,7 +34,8 @@ int main(void) {
       PORTB |= (negated_value << PIN8_OUT);
 
       // 6. Reset lastTime for the next interval
-      lastTime = currentTime;
+      // lastTime = currentTime; //! this can introduce timer drift if loop is late
+      lastTime += LED_DURATION; //! do this instead
     }
 
     // do something
