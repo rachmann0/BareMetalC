@@ -1,10 +1,10 @@
-#include "sysTime.h"
+#include "sys_time.h"
 
 volatile static uint32_t ms_counter = 0; 
 // volatile tells compiler to NOT optimize this variable / “This variable can change outside normal program flow.”
 // and static so that no external file can change this variable
 
-void sysTime_init(void) {
+void sys_time_init(void) {
     /*
      The counter value (TCNT0) increases until a compare match
      occurs between TCNT0 and OCR0A, and then counter (TCNT0) is cleared.
@@ -33,17 +33,13 @@ void sysTime_init(void) {
     TCCR0B |= (1<<CS01);
     TCCR0B |= (1<<CS00);
     TCCR0B &= ~(1<<CS02);
-
-    sei(); //! enables global interrupts
-
-
 }
 
 ISR(TIMER0_COMPA_vect){
     ms_counter++;
 }
 
-uint32_t sysTime(void){
+uint32_t sys_time(void){
     //* we do this stop and start again to ensure the ms counter is not changing in value when its assigned
     //* this is called atomic section or critical section
     //* “Atomic” means: Indivisible — cannot be interrupted halfway through.
