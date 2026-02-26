@@ -14,7 +14,6 @@ void tone_init(void) {
     // OCR1A = 18181;
     // OCR1A = 20407;
     // OCR1A = 24241;
-    
 
     //? TIMSK (Timer/Counter Interrupt Mask Register)
     //? OCIE (Output Compare Interrupt Enable) (this will enable the interrupt when OCR0A is true)
@@ -59,16 +58,3 @@ void tone_toggle(uint16_t ocr) {
 void set_tone(uint16_t ocr){
     OCR1A = ocr;
 }
-
-// uint16_t gen_compare_val(uint16_t target_freq){
-//     const uint8_t N = 1; //* prescaler
-//     //* F_CPU = 16Mhz
-//     uint16_t compare_value = F_CPU/(2*N*target_freq) - 1;
-//     return compare_value;
-// }
-
-// uint16_t gen_freq_val(uint16_t compare_val){
-//     const uint8_t N = 1; // prescaler
-//     uint16_t freq = F_CPU/(2*N*(compare_val + 1));
-//     return freq;
-// }

@@ -1,5 +1,5 @@
-#ifndef sys_time_H
-#define sys_time_H
+#ifndef SYS_TIME_H
+#define SYS_TIME_H
 
 #include <stdint.h>
 #include <avr/io.h>

@@ -8,22 +8,14 @@
 #include "config.h"
 #include "music.h"
 
+//! melody
+#include "ocarina_of_time.h"
+// #include "major_scale.h"
+
 
 uint32_t last_time = 0;
 uint32_t last_time_note = 0;
 const uint32_t LED_DURATION = 500;
-
-const Note melody[] PROGMEM = { //! PROGMEM stores it in flash (not SRAM)
-    {GET_COMPARE_VAL(262), 400},  // C4
-    {GET_COMPARE_VAL(294), 400},  // D4
-    {GET_COMPARE_VAL(330), 400},  // E4
-    {GET_COMPARE_VAL(349), 400},  // F4
-    {GET_COMPARE_VAL(392), 400},  // G4
-    {GET_COMPARE_VAL(440), 400},  // A4
-    {GET_COMPARE_VAL(494), 400},  // B4
-    {GET_COMPARE_VAL(523), 600}   // C5
-};
-const uint8_t melody_length = sizeof(melody)/sizeof(melody[0]);
 
 int main(void) {
   sys_time_init();
@@ -58,9 +50,6 @@ int main(void) {
         melody_index++;
         current_pitch = pgm_read_word(&melody[melody_index].ocr);
         current_note_duration = pgm_read_word(&melody[melody_index].duration_ms);
-
-        //* shorten the note to create a tiny gap (optional)
-        if (current_note_duration > 50) current_note_duration -= 50;
 
         // turn on next melody
         //? current_pitch = 0 for pauses

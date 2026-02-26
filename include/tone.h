@@ -21,10 +21,6 @@ void tone_toggle(uint16_t ocr);
 //? set
 void set_tone(uint16_t ocr);
 
-//? utils
-// uint16_t gen_compare_val(uint16_t target_freq);
-// uint16_t gen_freq_val(uint16_t compare_val);
-
 #define GET_COMPARE_VAL(target_freq) F_CPU/(2*target_freq) - 1
 //* N = Prescaler
 //* F_CPU = 16Mhz
