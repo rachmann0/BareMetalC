@@ -4,7 +4,7 @@
 #include "music.h"
 #include <avr/pgmspace.h>
 const Note melody[] PROGMEM = {
-    {0, 4000},  // 10 rest
+    {0, 1333},  // 10 rest
     {GET_COMPARE_VAL(293.6647679174076), 666},  // 21
     {GET_COMPARE_VAL(329.6275569128699), 666},  // 31
     {GET_COMPARE_VAL(587.3295358348151), 1113},  // 22
