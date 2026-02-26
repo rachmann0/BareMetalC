@@ -14,10 +14,11 @@ uint32_t last_time_note = 0;
 const uint32_t LED_DURATION = 500;
 
 const Note melody[] PROGMEM = { //! PROGMEM stores it in flash (not SRAM)
-    {GET_COMPARE_VAL(440), 500},  // A4, 500ms
-    {GET_COMPARE_VAL(392), 500},  // G4, 500ms
-    {GET_COMPARE_VAL(330), 500},  // E4, 500ms
-    {GET_COMPARE_VAL(262), 500}   // C4, 500ms
+    {GET_COMPARE_VAL(440), 800},  // A4, 800ms
+    {GET_COMPARE_VAL(392), 500},  // G4
+    {GET_COMPARE_VAL(330), 400},  // E4
+    {GET_COMPARE_VAL(262), 200},   // C4
+    {GET_COMPARE_VAL(440), 1000}  // A4
 };
 const uint8_t melody_length = sizeof(melody)/sizeof(melody[0]);
 
@@ -42,21 +43,21 @@ int main(void) {
     //? if current_note_duration has elapsed since last time, change notes
     if (current_time - last_time_note >= current_note_duration)
     {
-      if (melody_index < melody_length) {
-        // turn off current melody first
-        tone_off();
+      // turn off current melody first
+      tone_off();
+
+      // melody_length - 1 because last time increment is before tone_on
+      if (melody_index < melody_length-1) { 
+        // shift last time to current time by adding current_note_duration
+        last_time_note += current_note_duration; 
+
         // increment melody
         melody_index++;
         current_pitch = pgm_read_word(&melody[melody_index].ocr);
         current_note_duration = pgm_read_word(&melody[melody_index].duration_ms);
         // turn on next melody
         tone_on(current_pitch);
-
-        last_time_note += current_note_duration;
-      } else {
-        tone_off();
-      }
-      
+      }      
     }
 
     //? if LED_DURATION has elapsed since last time, toggle LED
