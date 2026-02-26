@@ -1,3 +1,4 @@
+//! NOTES AT THE BOTTOM !
 #include <stdint.h>
 
 #include <avr/io.h>
@@ -47,3 +48,17 @@ int main(void) {
   }
   
 }
+
+/*
+!Core Tradeoff for Prescales choice.
+!Prescaler choice is always:
+  Resolution vs Maximum Time
+*Smaller prescaler:
+  -Higher resolution
+  -Smaller max delay before overflow
+*Larger prescaler:
+  -Lower resolution
+  -Bigger possible delay
+
+You can’t maximize both.
+*/
