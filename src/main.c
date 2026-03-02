@@ -12,6 +12,7 @@
 #include "ocarina_of_time.h"
 // #include "major_scale.h"
 
+// test comment
 
 uint32_t last_time = 0;
 uint32_t last_time_note = 0;
